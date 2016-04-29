@@ -22,29 +22,27 @@ public class SuperTrunfoServer {
 		try {
 			int serverPort = 7896;
 
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 2; i++) {
 
 				listenSocket = new ServerSocket(serverPort);
 				clienteSocket = listenSocket.accept();
 				listaClientes.add(clienteSocket);
 
-				clienteSocket.close();
 				listenSocket.close();
 			}
 
-			// an echo server
 			Thread.sleep(300);
 
-			for (Socket cliente : listaClientes) {
+			for (Socket player : listaClientes) {
 
-				in = new DataInputStream(clienteSocket.getInputStream());
-				out = new DataOutputStream(clienteSocket.getOutputStream());
+				in = new DataInputStream(player.getInputStream());
+				out = new DataOutputStream(player.getOutputStream());
 				Thread.sleep(3000);
 				String data = in.readUTF();
 				out.writeUTF(data);
 
+				player.close();
 				clienteSocket.close();
-				listenSocket.close();
 			}
 
 		} catch (EOFException e) {
