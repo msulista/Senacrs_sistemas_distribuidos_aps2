@@ -2,6 +2,7 @@ package Jogador;
 
 import java.util.List;
 
+import util.Console;
 import Carta.Baralho;
 import Carta.CartaST;
 
@@ -25,6 +26,13 @@ public class Jogador {
 			System.out
 					.println("-----------------------------------------------------");
 		}
+	}
+	
+	public CartaST realizaJogada(){
+		
+		CartaST carta = maoPlayer.get(Console.lerInt("Informe a carta desejada: "));
+		maoPlayer.remove(carta);
+		return carta;
 	}
 	
 	
